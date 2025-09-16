@@ -2,6 +2,7 @@
 from datetime import datetime
 from db import DatabaseConfig
 from model import PriorityLevel
+from repository import KanbanRepository
 from service import KanbanService
 
 
@@ -21,12 +22,9 @@ def exemplo_uso():
     #     password="sua_senha"
     # )
     
-    # Inicializar sistema com SQLite
-    kanban = KanbanService(sqlite_config)
-    
-    # Criar tabelas
-    kanban.create_tables()
-    
+    repository = KanbanRepository(sqlite_config)
+    kanban = KanbanService(repository)
+        
     # Criar um quadro
     board = kanban.create_board("Projeto de Exemplo", "Descrição do projeto")
     print(f"Quadro criado: {board}")
